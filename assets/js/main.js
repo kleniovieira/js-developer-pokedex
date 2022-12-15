@@ -5,9 +5,14 @@ const maxRecords = 151
 const limit = 10
 let offset = 0;
 
+function viewPokemon(event) {
+    event.currentTarget.classList.toggle("full-page");
+    document.body.style.overflow = document.body.style.overflow ? "" : "hidden";
+}
+
 function convertPokemonToLi(pokemon) {
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li class="pokemon ${pokemon.type}" onclick="viewPokemon(event)">
             <span class="number">#${pokemon.number}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -16,8 +21,14 @@ function convertPokemonToLi(pokemon) {
                     ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
                 </ol>
 
-                <img src="${pokemon.photo}"
-                     alt="${pokemon.name}">
+                <img src="${pokemon.photo}" alt="${pokemon.name}">
+            </div>
+            <div class="info">
+                <h3>Info</h3>
+                <hr />
+                Peso: ${pokemon.weight}<br />
+                Altura: ${pokemon.height}<br />
+                Experiência: ${pokemon.experience}<br />
             </div>
         </li>
     `
